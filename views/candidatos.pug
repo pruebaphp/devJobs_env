@@ -1,0 +1,22 @@
+extends ./layouts/layout
+
+block contenido 
+    main.lista-candidatos 
+        h2 Lista de Candidatos 
+        if candidatos.length
+            each candidato in candidatos 
+                .candidato 
+                    .caja 
+                        p.etiqueta Nombre: 
+                        p.nombre= candidato.nombre
+
+                    .caja 
+                        p.etiqueta Email: 
+                        p.nombre= candidato.email
+
+                    .caja 
+                        p.etiqueta CV: 
+                        a(href=`/uploads/cv/${candidato.cv}` target="_blank" class="btn btn-verde") Ver CV
+
+        else 
+            p No hay candidatos aún

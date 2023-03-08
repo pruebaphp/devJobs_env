@@ -1,0 +1,28 @@
+extends ../layouts/layout
+
+block contenido
+    if errores
+        div.alertas
+            each error in errores
+                div.error.alerta= error.msg
+    main.contenedor 
+        form(action="/registro" method="POST" class="default-form")
+            div.campo
+                label(for="") Nombre 
+                input(type="text" name="nombre" placeholder="Tu nombre" value= `${datos ? datos.nombre : ""}`)
+            div.campo  
+                label(for="") Email  
+                input(type="text" name="email" placeholder="Tu email" value= `${datos ? datos.email : ""}`)
+            div.campo  
+                label(for="") Password 
+                input(type="password" name="password" placeholder="Tu contraseña" value= `${datos ? datos.password : ""}`)
+            div.campo  
+                label(for="") Repite tu password 
+                input(type="password" name="confirmar" placeholder="Repite tu password" value= `${datos ? datos.confirmar : ""}`)
+            div.campo.acciones
+                a(href="/login") Prefiero iniciar sesión
+            .campo 
+                input(type="submit" value="Crear Cuenta" class="btn btn-azul")  
+
+block scripts
+    script(src="/js/registro.js") 

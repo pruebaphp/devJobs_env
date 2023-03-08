@@ -1,0 +1,25 @@
+extends layouts/layout
+
+block contenido 
+    main.lista-vacantes 
+        h2 Lista de Vacantes 
+        if vacantes.length 
+            each vacante in vacantes 
+                div.vacante
+                    div.caja
+                        h3= vacante.empresa
+                        p.puesto= vacante.titulo 
+                    
+                    div.caja
+                        p.etiqueta= Ubicacion 
+                        p.nombre= vacante.ubicacion
+                    
+                    div.caja
+                        p.etiqueta=Contrato 
+                        p.nombre.contrato= vacante.contrato 
+                    
+                    div.caja.centrar-vertical
+                        a(href=`/vacantes/${vacante.url}` class="btn btn-verde") Más Info
+         
+        else
+            p No hay vacantes

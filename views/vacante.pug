@@ -1,0 +1,66 @@
+extends layouts/layout
+
+block contenido
+
+    if errores 
+        div.alertas
+            each error in errores 
+                div.error.alerta= error.msg
+
+    div.contenido-superior.vacante.contenedor
+        div.caja 
+            p.etiqueta Empresa 
+            p.nombre=vacante.empresa
+
+        div.caja 
+            p.etiqueta Ubicación 
+            p.nombre=vacante.ubicacion
+
+        div.caja 
+            p.etiqueta Contrato 
+            p.nombre=vacante.contrato
+
+        div.caja 
+            p.etiqueta Salario 
+            p.nombre=vacante.salario
+
+    
+    div.vacante-contenedor.contenedor 
+        main.contenido 
+            h2 Descripción del puesto 
+            div.vacante-descripcion 
+        
+        input(type="hidden" class="inputHTML" value=vacante.descripcion)
+           
+        aside.sidebar 
+            h2 Conocimientos deseados 
+            ul.skills
+                each skill in vacante.skills 
+                    li= skill
+        
+    .contenedor.datos-reclutador
+        .enviar-datos 
+            h2 Contactar Reclutador
+            p Llena el siguiente formulario, sube tu curriculum y pronto te contactaremos 
+            form(action=`/vacantes/${vacante.url}` method="POST" class="default-form" enctype="multipart/form-data")
+                div.campo
+                    label Nombre
+                    input(type="text" name="nombre" placeholder="Tu nombre" value= `${datos ? datos.nombre : ''}`) 
+                div.campo
+                    label Email
+                    input(type="email" name="email" placeholder="Tu email" value= `${datos ? datos.email : ''}`) 
+                div.campo
+                    label CV (PDF)
+                    input(type="file" name="cv") 
+                div.campo
+                    input(type="submit" value="enviar" class="btn btn-verde") 
+        .info-reclutador 
+            h2 Información Reclutador 
+            if vacante.autor.nombre
+                p= vacante.autor.nombre
+            if vacante.autor.imagen
+                img(src=`/uploads/perfiles/${vacante.autor.imagen}`, alt=`imagen de ${vacante.autor.nombre}`)
+
+block scripts 
+    script(src="/js/vacante.js") 
+            

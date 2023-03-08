@@ -1,0 +1,47 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap" rel="stylesheet")
+        link(rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css")
+        link(rel="stylesheet", href="/css/app.css")
+        title= nombrePagina
+    body
+
+        div(class="nombre-sitio contenedor")
+            h1
+                a(href="/") DevJobs 
+
+            if barra 
+                div.buscador
+                    form(action="/buscador" method="POST")
+                        input(type="text" name="q" class="buscar")
+                        input(type="submit" value="Buscar")
+            
+            if cerrarSesion
+                .cerrar-sesion
+                    p= "Hola! "+nombre
+                    if imagen
+                        img(src=`/uploads/perfiles/${imagen}`, alt=`imagen de perfil ${imagen}` class="admin-perfil")
+                    a(href="/administracion") Administración  
+                    a(href="/cerrar-sesion") Cerrar Sesión
+
+
+        header.site-header.contenedor.separador 
+            h2= nombrePagina
+            if tagline 
+                p.tagline= tagline
+
+            if boton
+                a(href="/vacantes/nueva" class="btn btn-azul") Publicar nueva vacante 
+
+
+        div.contenido-principal.contenedor 
+            block contenido
+        
+        script(type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js")
+        script(src="/js/bundle.js")
+        script(src="/js/app.js")
+        block scripts 

@@ -1,0 +1,28 @@
+extends layouts/layout
+
+block contenido 
+    main.lista-vacante 
+        h2 Navegación 
+        div.botones.separador
+            a(href="/editar-perfil" class="btn btn-azul") Editar Perfil
+            a(href="/vacantes/nueva" class="btn btn-verde") Nueva vacante
+
+        h2 Tus vacantes
+        if vacantes.length
+            each vacante in vacantes
+                div.vacante.panel-administracion
+                    div.caja
+                        h3=vacante.empresa 
+                        p.puesto= vacante.titulo 
+                        p.candidatos= `${vacante.candidatos.length<=1 ? vacante.candidatos.length+" candidato" : vacante.candidatos.length+" candidatos"}`
+                    div.centrar-vertical.caja
+                        a(href=`/candidatos/${vacante.id}` class="btn btn-amarillo") Candidatos 
+                    div.centrar-vertical.caja
+                        a(href=`/vacantes/editar/${vacante.url}` class="btn btn-verde") Editar
+                    div.centrar-vertical.caja
+                        a(href=`/vacantes/eliminar/${vacante.id}` data-id=`${vacante.id}` class="btn btn-rojo") Eliminar
+        else 
+            p No hay vacantes
+
+block scripts
+    script(src="/js/administracion.js") 

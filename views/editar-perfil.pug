@@ -1,0 +1,28 @@
+extends layouts/layout
+
+block contenido
+    if errores
+        div.alertas
+            each error in errores
+                div.error.alerta= error.msg 
+
+    main.contenedor 
+        form(action="/editar-perfil" method="POST" class="default-form" enctype="multipart/form-data")
+            div.campo 
+                label Nombre 
+                input(type="text" name="nombre" placeholder="Tu nombre" value= datosUsuario ? datosUsuario.nombre : '')
+            div.campo 
+                label Email 
+                input(type="email" name="email" placeholder="Tu email" value= datosUsuario ? datosUsuario.email : '' readonly)
+            div.campo 
+                label Password 
+                input(type="password" name="password" placeholder="Tu password")
+            
+            div.campo
+                label Imagen
+                input(type="file" name="imagen" placeholder="Tu imagen de perfil")
+                if imagen
+                    img(src=`/uploads/perfiles/${imagen}`, alt=`imagen de ${imagen}` class="admin-perfil")
+
+            div.campo 
+                input(type="submit" value="Guardar cambios" class="btn btn-azul")

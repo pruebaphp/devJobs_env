@@ -1,0 +1,29 @@
+extends ../layouts/layout
+
+block contenido
+    main.contenedor
+        if errores
+                div.alertas
+                    each error in errores
+                        div.error.alerta= error.msg
+
+        form(action="/login" method="POST" class="default-form")
+        
+ 
+            div.campo
+                label(for="") Email
+                input(type="email" name="email" placeholder="Tu Email" value=`${data ? data.email : ""}`)
+
+            div.campo
+                label(for="") Password
+                input(type="password" name="password" placeholder="Tu password")
+
+            div.campo.acciones
+                a(href="/registro") Crea una cuenta 
+                a(href="/reset-password") Olvidé mi passord 
+
+            div.campo 
+                input(type="submit" value="Iniciar Sesión" class="btn btn-azul") 
+
+block scripts 
+    script(src="/js/registro.js") 
